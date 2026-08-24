@@ -22,3 +22,44 @@ def load_data(path: Path) -> pd.DataFrame:
 
     return df
 
+# Chart 1: Countries with most number one appearances
+
+def plot_number_one_rankings(df: pd.DataFrame) -> None:
+    """Plot countries with the most number one ranking appearances."""
+
+    # Filter the dataset to records where a country was ranked number one
+    # Group by country and count the number of appearances
+    top_countries = (
+        df[df["rank"] == 1]
+        .groupby("country_full")
+        .size()
+        .reset_index(name="number_one_appearances")
+        .sort_values(
+            "number_one_appearances",
+            ascending=False
+        )
+        .head(10)
+    )
+
+    # Create the figure
+    plt.figure(figsize=(10, 6))
+
+    # Create the bar chart
+    plt.bar(
+        top_countries["country_full"],
+        top_countries["number_one_appearances"]
+    )
+
+    # Add a chart title and axis labels
+    plt.title("Countries with Most FIFA #1 Ranking Appearances")
+    plt.xlabel("Country")
+    plt.ylabel("Number of #1 Appearances")
+
+    # Rotate country names so they are easier to read
+    plt.xticks(rotation=45)
+
+    # Adjust the layout to prevent labels being cut off
+    plt.tight_layout()
+
+    # Display the chart
+    plt.show()
