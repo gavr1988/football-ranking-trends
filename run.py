@@ -37,3 +37,19 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     print(f"rank_date dtype after conversion: {df['rank_date'].dtype}")
+
+     # Remove duplicate country/date observations
+    df = df.drop_duplicates(
+        subset=["country_full", "rank_date"],
+        keep="last"
+    )
+
+    # Clean string columns
+    text_columns = [
+        "country_full",
+        "country_abrv",
+        "confederation"
+    ]
+
+    for column in text_columns:
+        df[column] = df[column].str.strip()
