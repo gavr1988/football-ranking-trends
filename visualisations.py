@@ -106,9 +106,12 @@ def plot_top_10_appearances(df: pd.DataFrame) -> None:
     # Display the chart
     plt.show()
 
+
 # Chart 3: Ranking history for selected countries
-    def plot_ranking_history(df: pd.DataFrame) -> None:
-     """Plot FIFA ranking history for selected countries."""
+
+
+def plot_ranking_history(df: pd.DataFrame) -> None:
+    """Plot FIFA ranking history for selected countries."""
 
     # Countries selected for comparison
     selected_countries = [
@@ -119,12 +122,12 @@ def plot_top_10_appearances(df: pd.DataFrame) -> None:
         "France"
     ]
 
-    # Filter the dataset to only the selected countries
+    # Filter the dataset to only include the selected countries
     selected_data = df[
         df["country_full"].isin(selected_countries)
     ].copy()
 
-    # Sort the data chronologically
+    # Sort the data by country and ranking date
     selected_data = selected_data.sort_values(
         ["country_full", "rank_date"]
     )
@@ -132,7 +135,7 @@ def plot_top_10_appearances(df: pd.DataFrame) -> None:
     # Create the figure
     plt.figure(figsize=(12, 7))
 
-    # Create one line for each selected country
+    # Create one line for each country
     for country in selected_countries:
 
         country_data = selected_data[
@@ -145,22 +148,21 @@ def plot_top_10_appearances(df: pd.DataFrame) -> None:
             label=country
         )
 
-    # Add chart title and axis labels
+    # Add chart title and labels
     plt.title("FIFA Ranking History of Selected Countries")
     plt.xlabel("Ranking Date")
     plt.ylabel("FIFA Ranking")
 
-    # Reverse the y-axis because rank 1 is the best ranking
-    # This means better rankings appear higher on the chart
+    # Rank 1 should appear at the top of the chart
     plt.gca().invert_yaxis()
 
-    # Add a legend to identify each country's line
+    # Display the country names
     plt.legend()
 
-    # Add a grid to make ranking changes easier to follow
+    # Add grid lines to make changes easier to follow
     plt.grid(alpha=0.3)
 
-    # Adjust spacing
+    # Prevent labels from being cut off
     plt.tight_layout()
 
     # Display the chart
