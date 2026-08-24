@@ -53,3 +53,22 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     for column in text_columns:
         df[column] = df[column].str.strip()
+
+    # Create useful date fields
+    df["year"] = df["rank_date"].dt.year
+    df["month"] = df["rank_date"].dt.month
+    df["month_name"] = df["rank_date"].dt.month_name()
+
+    # Create ranking groups
+    df["rank_band"] = pd.cut(
+        df["rank"],
+        bins=[0, 10, 25, 50, float("inf")],
+        labels=[
+            "Top 10",
+            "11-25",
+            "26-50",
+            "51+"
+        ]
+    )
+
+    
