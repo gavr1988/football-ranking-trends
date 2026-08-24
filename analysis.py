@@ -31,3 +31,20 @@ def basic_summary(df: pd.DataFrame) -> None:
     print(f"Last ranking date: {df['rank_date'].max().date()}")
 
 
+# Question 1
+def number_one_rankings(df: pd.DataFrame) -> pd.DataFrame:
+    """Which countries appeared at number one most often?"""
+
+    result = (
+        df[df["rank"] == 1]
+        .groupby("country_full")
+        .size()
+        .reset_index(name="number_one_appearances")
+        .sort_values(
+            "number_one_appearances",
+            ascending=False
+        )
+    )
+
+    return result
+
