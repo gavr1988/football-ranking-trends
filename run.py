@@ -106,3 +106,23 @@ def save_data(df: pd.DataFrame, path: Path) -> None:
 
     print(f"\nCleaned dataset saved to: {path}")
 
+# Calling the functions to load, clean, and save the data
+def main():
+
+    # Load raw data
+    df = load_data(RAW_PATH)
+
+    # Clean data
+    df_clean = clean_data(df)
+
+    # Show preview of cleaned data
+    print("\nCleaned data preview:")
+    print("-" * 40)
+    print(df_clean.head())
+
+    # Save cleaned data
+    save_data(df_clean, OUTPUT_PATH)
+
+
+if __name__ == "__main__":
+    main()
