@@ -71,4 +71,8 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
         ]
     )
 
-    
+    # Indicator fields
+    df["is_number_one"] = df["rank"].eq(1)
+    df["is_top_10"] = df["rank"].le(10)
+    df["is_top_50"] = df["rank"].le(50)
+
