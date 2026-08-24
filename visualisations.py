@@ -106,4 +106,62 @@ def plot_top_10_appearances(df: pd.DataFrame) -> None:
     # Display the chart
     plt.show()
 
-    
+# Chart 3: Ranking history for selected countries
+    def plot_ranking_history(df: pd.DataFrame) -> None:
+     """Plot FIFA ranking history for selected countries."""
+
+    # Countries selected for comparison
+    selected_countries = [
+        "Brazil",
+        "Germany",
+        "Argentina",
+        "Spain",
+        "France"
+    ]
+
+    # Filter the dataset to only the selected countries
+    selected_data = df[
+        df["country_full"].isin(selected_countries)
+    ].copy()
+
+    # Sort the data chronologically
+    selected_data = selected_data.sort_values(
+        ["country_full", "rank_date"]
+    )
+
+    # Create the figure
+    plt.figure(figsize=(12, 7))
+
+    # Create one line for each selected country
+    for country in selected_countries:
+
+        country_data = selected_data[
+            selected_data["country_full"] == country
+        ]
+
+        plt.plot(
+            country_data["rank_date"],
+            country_data["rank"],
+            label=country
+        )
+
+    # Add chart title and axis labels
+    plt.title("FIFA Ranking History of Selected Countries")
+    plt.xlabel("Ranking Date")
+    plt.ylabel("FIFA Ranking")
+
+    # Reverse the y-axis because rank 1 is the best ranking
+    # This means better rankings appear higher on the chart
+    plt.gca().invert_yaxis()
+
+    # Add a legend to identify each country's line
+    plt.legend()
+
+    # Add a grid to make ranking changes easier to follow
+    plt.grid(alpha=0.3)
+
+    # Adjust spacing
+    plt.tight_layout()
+
+    # Display the chart
+    plt.show()
