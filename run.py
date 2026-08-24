@@ -76,3 +76,11 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df["is_top_10"] = df["rank"].le(10)
     df["is_top_50"] = df["rank"].le(50)
 
+# FIFA points are not available throughout the full dataset
+    df["has_total_points"] = df["total_points"].gt(0)
+
+    # Sort chronologically by country
+    df = df.sort_values(
+        ["country_full", "rank_date"]
+    ).reset_index(drop=True)
+
