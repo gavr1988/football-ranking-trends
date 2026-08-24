@@ -3,17 +3,18 @@ from pathlib import Path
 import pandas as pd
 
 
-
 # File paths
-
 RAW_PATH = Path("data/raw/fifa_ranking.csv")
 OUTPUT_PATH = Path("data/cleaned/fifa_ranking_clean.csv")
 
+
 def load_data(path: Path) -> pd.DataFrame:
     """Load the raw FIFA rankings dataset."""
+
     df = pd.read_csv(path)
 
     print(f"Loaded {len(df):,} rows and {df.shape[1]} columns.")
+
     return df
 
 
@@ -27,18 +28,26 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     print("-" * 40)
     print(df.dtypes)
 
-    print(f"\nrank_date dtype before conversion: {df['rank_date'].dtype}")
+    print(
+        f"\nrank_date dtype before conversion: "
+        f"{df['rank_date'].dtype}"
+    )
 
-  
- # Convert ranking date from text to datetime
+    # Convert ranking date from text to datetime
     df["rank_date"] = pd.to_datetime(
         df["rank_date"],
         errors="coerce"
     )
 
-    print(f"rank_date dtype after conversion: {df['rank_date'].dtype}")
+    print(
+        f"rank_date dtype after conversion: "
+        f"{df['rank_date'].dtype}"
+    )
 
-     # Remove duplicate country/date observations
+    # Remove rows with invalid dates
+    df = df.dropna(subset=["rank_date"])
+
+    # Remove duplicate country/date observations
     df = df.drop_duplicates(
         subset=["country_full", "rank_date"],
         keep="last"
@@ -76,7 +85,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df["is_top_10"] = df["rank"].le(10)
     df["is_top_50"] = df["rank"].le(50)
 
-# FIFA points are not available throughout the full dataset
+    # FIFA points are not available throughout the full dataset
     df["has_total_points"] = df["total_points"].gt(0)
 
     # Sort chronologically by country
@@ -84,3 +93,6 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
         ["country_full", "rank_date"]
     ).reset_index(drop=True)
 
+    return df
+
+# Calling the functions
