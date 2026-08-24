@@ -81,3 +81,18 @@ def top_50_by_confederation(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     return result
+
+# Question 4
+def latest_rankings(df: pd.DataFrame) -> pd.DataFrame:
+    """Show the Top 10 countries on the latest ranking date."""
+
+    latest_date = df["rank_date"].max()
+
+    result = (
+        df[df["rank_date"] == latest_date]
+        .sort_values("rank")
+        .head(10)
+        [["rank", "country_full", "confederation"]]
+    )
+
+    return result
