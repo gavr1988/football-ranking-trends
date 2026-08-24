@@ -22,4 +22,18 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.copy()
 
-    
+    # Check data types before making any conversions
+    print("\nData types before cleaning:")
+    print("-" * 40)
+    print(df.dtypes)
+
+    print(f"\nrank_date dtype before conversion: {df['rank_date'].dtype}")
+
+  
+ # Convert ranking date from text to datetime
+    df["rank_date"] = pd.to_datetime(
+        df["rank_date"],
+        errors="coerce"
+    )
+
+    print(f"rank_date dtype after conversion: {df['rank_date'].dtype}")
