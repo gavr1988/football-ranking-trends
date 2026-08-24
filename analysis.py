@@ -64,3 +64,20 @@ def top_10_appearances(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     return result
+
+# Question 3
+def top_50_by_confederation(df: pd.DataFrame) -> pd.DataFrame:
+    """Which confederations have the most Top 50 appearances?"""
+
+    result = (
+        df[df["rank"] <= 50]
+        .groupby("confederation")
+        .size()
+        .reset_index(name="top_50_appearances")
+        .sort_values(
+            "top_50_appearances",
+            ascending=False
+        )
+    )
+
+    return result
