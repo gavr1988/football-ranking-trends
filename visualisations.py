@@ -165,3 +165,25 @@ def plot_top_10_appearances(df: pd.DataFrame) -> None:
 
     # Display the chart
     plt.show()
+
+# Main workflow
+
+def main():
+    """Run the visualisation workflow."""
+
+    # Load the cleaned dataset
+    df = load_data(DATA_PATH)
+
+    # Chart 1: Countries with most number one appearances
+    plot_number_one_rankings(df)
+
+    # Chart 2: Countries with most Top 10 appearances
+    plot_top_10_appearances(df)
+
+    # Chart 3: Ranking history for selected countries
+    plot_ranking_history(df)
+
+
+# Run the visualisation workflow when this file is executed directly
+if __name__ == "__main__":
+    main()
