@@ -61,6 +61,10 @@ def plot_number_one_rankings(df: pd.DataFrame) -> None:
     # Adjust the layout to prevent labels being cut off
     plt.tight_layout()
 
+    #Saving to outputs/charts folder
+
+    plt.savefig("outputs/charts/number_one_rankings.png")
+
     # Display the chart
     plt.show()
 
@@ -102,6 +106,9 @@ def plot_top_10_appearances(df: pd.DataFrame) -> None:
 
     # Adjust spacing
     plt.tight_layout()
+
+     #Saving to outputs/charts folder
+    plt.savefig("outputs/charts/top_10_appearances.png")
 
     # Display the chart
     plt.show()
@@ -164,6 +171,9 @@ def plot_ranking_history(df: pd.DataFrame) -> None:
 
     # Prevent labels from being cut off
     plt.tight_layout()
+
+    # Saving to outputs/charts folder
+    plt.savefig("outputs/charts/ranking_history.png")
 
     # Display the chart
     plt.show()
