@@ -95,4 +95,14 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-# Calling the functions
+# saving the data to a new csv file in the cleaned folder
+def save_data(df: pd.DataFrame, path: Path) -> None:
+    """Save the cleaned dataset."""
+
+    # Create cleaned folder if it doesn't already exist
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_csv(path, index=False)
+
+    print(f"\nCleaned dataset saved to: {path}")
+
