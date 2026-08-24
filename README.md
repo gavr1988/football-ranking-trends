@@ -716,3 +716,5 @@ The data is used here for educational and portfolio analysis purposes.
 The final interactive dashboard can be viewed here:
 
 [**FIFA World Rankings: 1993–2018 — Tableau Public**](https://public.tableau.com/app/profile/gavan.rewt/viz/FIFA_17875763718800/FIFAWorldRankings1993-2018)
+
+Thank you for reading
