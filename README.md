@@ -26,6 +26,9 @@ The completed interactive dashboard is available on Tableau Public:
 
 [View the FIFA World Rankings Dashboard on Tableau Public](https://public.tableau.com/app/profile/gavan.rewt/viz/FIFA_17875763718800/FIFAWorldRankings1993-2018)
 
+## Dashboard Preview
+
+![FIFA World Rankings Dashboard](outputs/tableau_dashboard.png)
 ---
 
 ## Dataset
@@ -331,6 +334,10 @@ Results are printed directly to the terminal.
 The `visualisations.py` script creates three supporting charts using **matplotlib**.
 
 The goal of these visualisations is to provide a quick exploratory view of the main findings before moving into Tableau.
+
+### Example Python Visualisation
+
+![FIFA Ranking History](outputs/charts/ranking_history.png)
 
 ---
 
