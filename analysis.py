@@ -96,3 +96,44 @@ def latest_rankings(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     return result
+
+def main():
+
+    # Load the cleaned dataset and display a basic summary
+    df = load_data(DATA_PATH)
+    basic_summary(df)
+
+    # Run each analysis question and print the results to the terminal
+
+    # Question 1: Countries with the most appearances at number one
+    number_one = number_one_rankings(df)
+
+    print("\n1. Countries with most #1 ranking appearances")
+    print("-" * 50)
+    print(number_one.head(10).to_string(index=False))
+
+    # Question 2: Countries with the most Top 10 appearances
+    top_10 = top_10_appearances(df)
+
+    print("\n2. Countries with most Top 10 appearances")
+    print("-" * 50)
+    print(top_10.head(10).to_string(index=False))
+
+    # Question 3: Confederations with the most Top 50 appearances
+    confederations = top_50_by_confederation(df)
+
+    print("\n3. Confederations with most Top 50 appearances")
+    print("-" * 50)
+    print(confederations.to_string(index=False))
+
+    # Question 4: Display the Top 10 teams from the most recent ranking date
+    latest = latest_rankings(df)
+
+    print("\n4. Top 10 countries in the latest ranking")
+    print("-" * 50)
+    print(latest.to_string(index=False))
+
+
+# Run the main analysis workflow when this script is executed directly
+if __name__ == "__main__":
+    main()
