@@ -48,3 +48,19 @@ def number_one_rankings(df: pd.DataFrame) -> pd.DataFrame:
 
     return result
 
+# Question 2
+def top_10_appearances(df: pd.DataFrame) -> pd.DataFrame:
+    """Which countries appeared in the Top 10 most often?"""
+
+    result = (
+        df[df["rank"] <= 10]
+        .groupby("country_full")
+        .size()
+        .reset_index(name="top_10_appearances")
+        .sort_values(
+            "top_10_appearances",
+            ascending=False
+        )
+    )
+
+    return result
